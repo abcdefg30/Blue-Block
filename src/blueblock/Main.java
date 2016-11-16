@@ -59,11 +59,11 @@ public class Main extends JFrame implements MouseListener, KeyListener {
 		mouse = HasMouse;
 		if (FieldColumns < 6) {
 			FieldColumns = 6;
-			System.out.println("FelderLinie can't be under six!");
+			System.out.println("FieldColumns can't be under six!");
 		}
 		if (FieldRows < 6) {
 			FieldRows = 6;
-			System.out.println("FelderReihe can't be under six!");
+			System.out.println("FieldRows can't be under six!");
 		}
 		if (Player <= 0 || Player > 4) {
 			System.out.println("Players can't be under 0 or above 4!");
@@ -93,7 +93,6 @@ public class Main extends JFrame implements MouseListener, KeyListener {
 		labels = new Label[FieldColumns][FieldRows];
 		for (int x = 0; x < labels.length; x++) {
 			for (int y = 0; y < labels[x].length; y++) {
-
 				String name = "label";
 				if (x < 10)
 					name += "0";

@@ -54,7 +54,7 @@ public class Human {
 				} else {
 					SetPoisoned(true);
 				}
-				// Main.colorChange(labels[GetY()][GetX()], color[Player]);
+				// Main.ChangeColor(labels[GetY()][GetX()], color[Player]);
 			}
 		} else {
 			System.out.println("Player " + name + " is dead!");
@@ -107,7 +107,7 @@ public class Human {
 		return poisoned;
 	}
 
-	public boolean guarded() {
+	public boolean Guarded() {
 		return guarded;
 	}
 

@@ -33,10 +33,9 @@ public class Options implements PropertyChangeListener, ActionListener, ItemList
 	JFrame options;
 	JLabel tHeight, tWidth;
 	JButton reset, save, abort;
-
 	JFormattedTextField eHeight, eWidth, PowerUpNumber;
 	JCheckBox Mouse, Kill;
-	Choice PlayerKill, PowerUps;
+	Choice playerCount, PowerUps;
 	final ImageIcon BlueBlock = new ImageIcon("src/img/blblockbut.png");
 	final ImageIcon RedBlock = new ImageIcon("src/img/rdblockbut.png");
 
@@ -73,19 +72,20 @@ public class Options implements PropertyChangeListener, ActionListener, ItemList
 		eWidth.setBounds(285, 10, 45, 40);
 		eWidth.addPropertyChangeListener(this);
 
-		JLabel PlayerText = new JLabel("Spieler:");
-		options.add(PlayerText);
-		PlayerText.setFont(new Font("Chiller", 1, 30));
-		PlayerText.setBounds(20, 60, 90, 40);
+		JLabel playerText = new JLabel("Spieler:");
+		options.add(playerText);
+		playerText.setFont(new Font("Chiller", 1, 30));
+		playerText.setBounds(20, 60, 90, 40);
 
-		PlayerKill = new Choice();
+		playerCount = new Choice();
 		for (int i = 1; i < 5; i++)
-			PlayerKill.add(i + "");
-		options.add(PlayerKill);
-		PlayerKill.setBounds(110, 60, 80, 40);
-		PlayerKill.setFont(new Font("Arial", 1, 30));
-		PlayerKill.select(PlayerKill + "");
-		PlayerKill.addItemListener(this);
+			playerCount.add(i + "");
+
+		options.add(playerCount);
+		playerCount.setBounds(110, 60, 80, 40);
+		playerCount.setFont(new Font("Arial", 1, 30));
+		playerCount.select(playerCount + "");
+		playerCount.addItemListener(this);
 
 		JLabel TPowerUps = new JLabel("Power-Ups:");
 		options.add(TPowerUps);
@@ -158,12 +158,12 @@ public class Options implements PropertyChangeListener, ActionListener, ItemList
 
 	}
 
-	public void onStart(boolean onStart) {
-		options.setVisible(onStart);
+	public void setOpen(boolean setOpen) {
+		options.setVisible(setOpen);
 		LoadSettings();
 		eHeight.setText(MaxY + "");
 		eWidth.setText(MaxX + "");
-		PlayerKill.select(PlayerKill + "");
+		playerCount.select(playerCount + "");
 		PowerUps.select(powerUps + "");
 	}
 
@@ -171,7 +171,7 @@ public class Options implements PropertyChangeListener, ActionListener, ItemList
 		PrintWriter pWriter = null;
 		int Y = Integer.parseInt(eHeight.getText());
 		int X = Integer.parseInt(eWidth.getText());
-		int player = Integer.parseInt(PlayerKill.getSelectedItem());
+		int player = Integer.parseInt(playerCount.getSelectedItem());
 		int PUs = Integer.parseInt(PowerUps.getSelectedItem());
 		try {
 			pWriter = new PrintWriter(new BufferedWriter(new FileWriter("settings.txt")));
@@ -255,7 +255,7 @@ public class Options implements PropertyChangeListener, ActionListener, ItemList
 		if (e.getSource().equals(reset)) {
 			eHeight.setValue(16);
 			eWidth.setValue(16);
-			PlayerKill.select("4 Spieler");
+			playerCount.select("4 Spieler");
 			PowerUps.select("0");
 			Mouse.setSelected(true);
 			mouse = true;
@@ -265,8 +265,8 @@ public class Options implements PropertyChangeListener, ActionListener, ItemList
 		} else if (e.getSource().equals(save)) {
 			SaveSettings();
 		}
-		onStart(false);
-		menu.onStart(true);
+		setOpen(false);
+		menu.setOpen(true);
 	}
 
 	public int Player() {

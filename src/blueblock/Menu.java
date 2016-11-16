@@ -46,7 +46,7 @@ public class Menu extends JFrame {
 		start.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				onStart(false);
+				setOpen(false);
 				Option.LoadSettings();
 
 				Game = new Main(Option.Y(), Option.X(), Option.Player(), Option.PowerUps(), Option.HasMouse(), Option.PlayerKill());
@@ -88,8 +88,8 @@ public class Menu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				onStart(false);
-				Option.onStart(true);
+				setOpen(false);
+				Option.setOpen(true);
 			}
 
 		});
@@ -163,7 +163,7 @@ public class Menu extends JFrame {
 		menu.repaint();
 	}
 
-	public void onStart(boolean onStart) {
-		menu.setVisible(onStart);
+	public void setOpen(boolean setOpen) {
+		menu.setVisible(setOpen);
 	}
 }

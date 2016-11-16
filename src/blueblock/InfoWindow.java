@@ -17,7 +17,7 @@ public class InfoWindow extends JFrame {
 	private static boolean BlueBlockBool, GreenBlockBool, MagentaBlockBool, CyanBlockBool;
 	private static int BlueBlockScore, GreenBlockScore, MagentaBlockScore, CyanBlockScore, MouseScore;
 	private int Player;
-	JFrame InfoWindowObject;
+	JFrame infoWindow;
 	JTextArea InfoLog;
 	JTextArea Score, BlueBlock, GreenBlock, MagentaBlock, CyanBlock;
 	JButton NewGame;
@@ -25,19 +25,19 @@ public class InfoWindow extends JFrame {
 
 	public InfoWindow(int Player) {
 		this.Player = Player;
-		InfoWindowObject = new JFrame("Informationen");
-		InfoWindowObject.setLocation(700, 0);
-		InfoWindowObject.setSize(300, 700);
-		InfoWindowObject.setLayout(null);
-		InfoWindowObject.setResizable(false);
-		InfoWindowObject.setFocusable(false);
+		infoWindow = new JFrame("Informationen");
+		infoWindow.setLocation(700, 0);
+		infoWindow.setSize(300, 700);
+		infoWindow.setLayout(null);
+		infoWindow.setResizable(false);
+		infoWindow.setFocusable(false);
 		InfoLog = new JTextArea();
 		InfoLog.setBounds(10, 10, 260, 35);
 		InfoLog.setFont(new Font("papyrus", 1, 25));
 		InfoLog.setText("          Ereignislog:");
 		InfoLog.setSelectionColor(Color.WHITE);
 		InfoLog.setEditable(false);
-		InfoWindowObject.add(InfoLog);
+		infoWindow.add(InfoLog);
 		NewGame = new JButton(New_Game);
 		NewGame.setBounds(10, 55, 260, 40);
 		NewGame.setFont(new Font("papyrus", 1, 25));
@@ -52,7 +52,7 @@ public class InfoWindow extends JFrame {
 			}
 
 		});
-		InfoWindowObject.add(NewGame);
+		infoWindow.add(NewGame);
 		Score = new JTextArea();
 		Score.setBounds(10, 110, 260, 140);
 		Score.setFont(new Font("forte", Font.ITALIC, 15));
@@ -76,7 +76,7 @@ public class InfoWindow extends JFrame {
 			TextScore += "\n Maus: " + MouseScore;
 		}
 		Score.setText("PUNKTE:" + TextScore);
-		InfoWindowObject.add(Score);
+		infoWindow.add(Score);
 		BlueBlockBool = true;
 		BlueBlock = new JTextArea();
 		BlueBlock.setBounds(10, 255, 260, 90);
@@ -85,7 +85,7 @@ public class InfoWindow extends JFrame {
 		BlueBlock.setForeground(Color.WHITE);
 		BlueBlock.setEditable(false);
 		BlueBlock.setText(BlueBlockAlive + "\n" + BlueBlockposition + "\nKills: 0");
-		InfoWindowObject.add(BlueBlock);
+		infoWindow.add(BlueBlock);
 		switch (Player) {
 		case 4:
 			MagentaBlockBool = true;
@@ -95,7 +95,7 @@ public class InfoWindow extends JFrame {
 			MagentaBlock.setBackground(Color.MAGENTA);
 			MagentaBlock.setEditable(false);
 			MagentaBlock.setText(MagentaBlockAlive + "\n" + GreenBlockposition + "\nKills: 0");
-			InfoWindowObject.add(MagentaBlock);
+			infoWindow.add(MagentaBlock);
 		case 3:
 			CyanBlockBool = true;
 			CyanBlock = new JTextArea();
@@ -104,7 +104,7 @@ public class InfoWindow extends JFrame {
 			CyanBlock.setBackground(Color.CYAN);
 			CyanBlock.setEditable(false);
 			CyanBlock.setText(CyanBlockAlive + "\n" + MagentaBlockposition + "\nKills: 0");
-			InfoWindowObject.add(CyanBlock);
+			infoWindow.add(CyanBlock);
 		case 2:
 			GreenBlockBool = true;
 			GreenBlock = new JTextArea();
@@ -113,18 +113,18 @@ public class InfoWindow extends JFrame {
 			GreenBlock.setBackground(new Color(10, 220, 10));
 			GreenBlock.setEditable(false);
 			GreenBlock.setText(GreenBlockAlive + "\n" + CyanBlockposition + "\nKills: 0");
-			InfoWindowObject.add(GreenBlock);
+			infoWindow.add(GreenBlock);
 		default:
 		}
 		BlueBlockposition = "Platz: - ";
 		GreenBlockposition = "Platz: - ";
 		CyanBlockposition = "Platz: - ";
 		MagentaBlockposition = "Platz: - ";
-		InfoWindowObject.repaint();
+		infoWindow.repaint();
 	}
 
 	public void setOpen(boolean setOpen) {
-		InfoWindowObject.setVisible(setOpen);
+		infoWindow.setVisible(setOpen);
 		if (Main.EndGame)
 			this.dispose();
 	}
@@ -141,7 +141,7 @@ public class InfoWindow extends JFrame {
 			BlueBlockposition = "Platz: " + Player;
 			Player--;
 		}
-		if (Main.H1.Lives() && Main.H1.guarded())
+		if (Main.H1.Lives() && Main.H1.Guarded())
 			BlueBlockAlive += " und Gerüstet";
 		BlueBlockScore = Main.H1.Kills * 300 + Main.H1.steps + Main.H1.SuperScore * 50 + Main.H1.PowerUps * 5;
 		TextScore += "\n Blauer Spieler: " + BlueBlockScore;
@@ -157,7 +157,7 @@ public class InfoWindow extends JFrame {
 				GreenBlockposition = "Platz: " + Player;
 				Player--;
 			}
-			if (Main.H2.Lives() && Main.H2.guarded())
+			if (Main.H2.Lives() && Main.H2.Guarded())
 				GreenBlockAlive += " und Gerüstet";
 			GreenBlockScore = Main.H2.Kills * 300 + Main.H2.steps + Main.H2.SuperScore * 50 + Main.H2.PowerUps * 5;
 			TextScore += "\n Grüner Spieler: " + GreenBlockScore;
@@ -175,7 +175,7 @@ public class InfoWindow extends JFrame {
 				CyanBlockposition = "Platz: " + Player;
 				Player--;
 			}
-			if (Main.H3.Lives() && Main.H3.guarded())
+			if (Main.H3.Lives() && Main.H3.Guarded())
 				CyanBlockAlive += " und Gerüstet";
 			CyanBlockScore = Main.H3.Kills * 300 + Main.H3.steps + Main.H3.SuperScore * 50 + Main.H3.PowerUps * 5;
 			TextScore += "\n Cyaner Spieler: " + CyanBlockScore;
@@ -193,7 +193,7 @@ public class InfoWindow extends JFrame {
 				MagentaBlockposition = "Platz: " + Player;
 				Player--;
 			}
-			if (Main.H4.Lives() && Main.H4.guarded())
+			if (Main.H4.Lives() && Main.H4.Guarded())
 				MagentaBlockAlive = MagentaBlockAlive + " und Gerüstet";
 			MagentaBlockScore = Main.H4.Kills * 300 + Main.H4.steps + Main.H4.SuperScore * 50 + Main.H4.PowerUps * 5;
 			TextScore += "\n Magenta Spieler: " + MagentaBlockScore;
@@ -203,7 +203,7 @@ public class InfoWindow extends JFrame {
 		MouseScore = Main.MouseLava + Main.MouseWall * 2 + Main.MouseAcid * 3;
 		TextScore += "\n Maus: " + MouseScore;
 		Score.setText(TextScore);
-		InfoWindowObject.repaint();
+		infoWindow.repaint();
 		/*
 		 * for (int i = 0; i == Main.h.size(); i++) { int Score; String Alive =
 		 * ""; String Position = ""; if (Main.h.get(i).Lebt() &&
@@ -212,7 +212,7 @@ public class InfoWindow extends JFrame {
 		 * Main.h.get(i).GetName() + ": Lebt"; } else if (!Main.h.get(i).Lebt())
 		 * { Alive = Main.h.get(i).GetName() + ": Tod"; Position = "Platz: " +
 		 * Player; Player--; } if (Main.h.get(i).Lebt() &&
-		 * Main.h.get(i).guarded()) Alive += " und Gerüstet"; Score =
+		 * Main.h.get(i).Guarded()) Alive += " und Gerüstet"; Score =
 		 * Main.h.get(i).Kills * 200 + Main.h.get(i).steps +
 		 * Main.h.get(i).SuperScore * 50 + Main.h.get(i).PowerUps * 5; TextScore
 		 * += "\n" + Main.h.get(i).GetName() + ": " + Score; switch
